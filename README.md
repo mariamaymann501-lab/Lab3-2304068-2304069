@@ -1,11 +1,11 @@
 # Lab 3 - Part 2: Library (Books and Authors)
-
+Names : Mariam Ayman Ahmed , Jana Mohamed Deyaa
 A small Flask + MySQL website to manage the `library` database (tables `AUTHOR` and `BOOK`), with login / registration and image upload (Bonus).
 
 ## Project structure
 
 ```
-lab3-<student-id>/
+lab3-<2304068/2304069>/
 ├── problem2_DDL.sql            # creates the database `library` and the tables AUTHOR and BOOK
 ├── problem2_DML.sql            # seed data: 3 authors and 6 books
 ├── problem2_users.sql          # users table (login / registration)
