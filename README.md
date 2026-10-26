@@ -1,5 +1,6 @@
 # Lab 3 - Part 2: Library (Books and Authors)
 Names : Mariam Ayman Ahmed , Jana Mohamed Deyaa
+
 A small Flask + MySQL website to manage the `library` database (tables `AUTHOR` and `BOOK`), with login / registration and image upload (Bonus).
 
 ## Project structure
