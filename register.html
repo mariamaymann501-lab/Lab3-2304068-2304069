@@ -1,0 +1,51 @@
+{% extends "auth_base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<h1>Create your account</h1>
+<p class="subtitle">It only takes a minute.</p>
+
+<form method="post" action="{{ url_for('register') }}">
+
+  <div class="field {{ 'has-error' if errors.get('name') }}">
+    <label for="name">Full name</label>
+    <input type="text" id="name" name="name" value="{{ form.name }}"
+           maxlength="100" placeholder="Your full name" required autofocus>
+    {% if errors.get('name') %}
+      <span class="field-error">{{ errors.get('name') }}</span>
+    {% endif %}
+  </div>
+
+  <div class="field {{ 'has-error' if errors.get('email') }}">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" value="{{ form.email }}"
+           maxlength="255" placeholder="you@example.com" required>
+    {% if errors.get('email') %}
+      <span class="field-error">{{ errors.get('email') }}</span>
+    {% endif %}
+  </div>
+
+  <div class="field {{ 'has-error' if errors.get('password') }}">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password"
+           minlength="8" placeholder="At least 8 characters" required>
+    {% if errors.get('password') %}
+      <span class="field-error">{{ errors.get('password') }}</span>
+    {% endif %}
+  </div>
+
+  <div class="field {{ 'has-error' if errors.get('confirm_password') }}">
+    <label for="confirm_password">Confirm password</label>
+    <input type="password" id="confirm_password" name="confirm_password"
+           minlength="8" placeholder="Type it again" required>
+    {% if errors.get('confirm_password') %}
+      <span class="field-error">{{ errors.get('confirm_password') }}</span>
+    {% endif %}
+  </div>
+
+  <button type="submit" class="btn-primary">Create account</button>
+</form>
+
+<p class="switch">
+  Already a member? <a href="{{ url_for('login') }}">Log in</a>
+</p>
+{% endblock %}

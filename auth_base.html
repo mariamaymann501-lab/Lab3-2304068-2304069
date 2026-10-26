@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Welcome{% endblock %} · Library</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+</head>
+<body class="auth-page">
+
+  <!-- Left side: library artwork (only decoration, no logic) -->
+  <aside class="auth-side">
+    <div class="brand">
+      <span class="brand-mark">L</span>
+      <span>Library</span>
+    </div>
+
+    <div class="side-text">
+      <h2>Every book has a place.<br>So does every reader.</h2>
+      <p>Sign in to browse the catalogue and manage books and authors.</p>
+    </div>
+
+    <!-- A small bookshelf drawn with plain CSS -->
+    <div class="shelf" aria-hidden="true">
+      <span class="spine s1"></span>
+      <span class="spine s2"></span>
+      <span class="spine s3"></span>
+      <span class="spine s4"></span>
+      <span class="spine s5"></span>
+      <span class="spine s6"></span>
+      <span class="spine s7"></span>
+      <span class="spine s8"></span>
+    </div>
+  </aside>
+
+  <!-- Right side: the form -->
+  <main class="auth-main">
+    <div class="auth-box">
+
+      <!-- Switch between the two pages -->
+      <nav class="tabs">
+        <a href="{{ url_for('login') }}"
+           class="{{ 'active' if request.endpoint == 'login' }}">Log in</a>
+        <a href="{{ url_for('register') }}"
+           class="{{ 'active' if request.endpoint == 'register' }}">Register</a>
+      </nav>
+
+      <!-- Flash messages, e.g. "You have been logged out." -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for cat, msg in messages %}
+          <div class="alert {{ cat }}">{{ msg }}</div>
+        {% endfor %}
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+</body>
+</html>

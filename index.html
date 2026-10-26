@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Library</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main>
+    <div class="topbar">
+        <h1>Library Management</h1>
+        <div class="user-box">
+            <span>Hi, {{ session.get('name') }}</span>
+            <form method="post" action="{{ url_for('logout') }}">
+                <button type="submit">Log out</button>
+            </form>
+        </div>
+    </div>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}<ul class="messages">{% for message in messages %}<li>{{ message }}</li>{% endfor %}</ul>{% endif %}
+    {% endwith %}
+
+    <section>
+        <h2>Books</h2>
+        <table>
+            <tr><th>ID</th><th>Cover</th><th>Title</th><th>Price</th><th>Author ID</th><th>Actions</th></tr>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.book_id }}</td>
+                <td>{% if book.image_filename %}<img class="thumb" src="{{ url_for('static', filename='uploads/books/' ~ book.image_filename) }}" alt="Cover of {{ book.title }}">{% else %}<span class="no-image">No cover</span>{% endif %}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ "%.2f"|format(book.price) }}</td><td>{{ book.author_id }}</td>
+                <td class="actions">
+                    <a href="{{ url_for('edit_book', book_id=book.book_id) }}">Edit</a>
+                    <form method="post" action="{{ url_for('delete_book', book_id=book.book_id) }}" onsubmit="return confirm('Delete this book?')">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}<tr><td colspan="6">No books yet.</td></tr>{% endfor %}
+        </table>
+
+        <h3>Add a book</h3>
+        <form method="post" action="{{ url_for('add_book') }}" class="fields" enctype="multipart/form-data">
+            <label>Title <input name="title" required maxlength="150"></label>
+            <label>Price <input name="price" type="number" min="0" step="0.01" required></label>
+            <label>Author
+                <select name="author_id" required>
+                    <option value="">Choose an author</option>
+                    {% for author in authors %}<option value="{{ author.author_id }}">{{ author.name }} (ID {{ author.author_id }})</option>{% endfor %}
+                </select>
+            </label>
+            <label>Cover image (optional) <input name="image" type="file" accept="image/png,image/jpeg,image/gif,image/webp"></label>
+            <button type="submit">Add Book</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Authors</h2>
+        <table>
+            <tr><th>ID</th><th>Photo</th><th>Name</th><th>Country</th><th>Actions</th></tr>
+            {% for author in authors %}
+            <tr>
+                <td>{{ author.author_id }}</td>
+                <td>{% if author.image_filename %}<img class="thumb" src="{{ url_for('static', filename='uploads/authors/' ~ author.image_filename) }}" alt="Photo of {{ author.name }}">{% else %}<span class="no-image">No photo</span>{% endif %}</td>
+                <td>{{ author.name }}</td><td>{{ author.country }}</td>
+                <td class="actions">
+                    <a href="{{ url_for('edit_author', author_id=author.author_id) }}">Edit</a>
+                    <form method="post" action="{{ url_for('delete_author', author_id=author.author_id) }}" onsubmit="return confirm('Delete this author and all their books?')">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}<tr><td colspan="5">No authors yet.</td></tr>{% endfor %}
+        </table>
+
+        <h3>Add an author</h3>
+        <form method="post" action="{{ url_for('add_author') }}" class="fields" enctype="multipart/form-data">
+            <label>Name <input name="name" required maxlength="100"></label>
+            <label>Country <input name="country" required maxlength="50"></label>
+            <label>Photo (optional) <input name="image" type="file" accept="image/png,image/jpeg,image/gif,image/webp"></label>
+            <button type="submit">Add Author</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>

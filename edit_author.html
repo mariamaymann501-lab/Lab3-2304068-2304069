@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Edit Author</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head>
+<body><main><h1>Edit Author</h1>
+{% with messages = get_flashed_messages() %}{% if messages %}<ul class="messages">{% for message in messages %}<li>{{ message }}</li>{% endfor %}</ul>{% endif %}{% endwith %}
+<form method="post" class="fields" enctype="multipart/form-data">
+<label>Name <input name="name" value="{{ author.name }}" required maxlength="100"></label>
+<label>Country <input name="country" value="{{ author.country }}" required maxlength="50"></label>
+{% if author.image_filename %}<div class="current-image"><img class="preview" src="{{ url_for('static', filename='uploads/authors/' ~ author.image_filename) }}" alt="Current photo"><label class="inline"><input type="checkbox" name="remove_image" value="1"> Remove current photo</label></div>{% endif %}
+<label>{% if author.image_filename %}Replace photo{% else %}Photo (optional){% endif %} <input name="image" type="file" accept="image/png,image/jpeg,image/gif,image/webp"></label>
+<button type="submit">Save Changes</button><a href="{{ url_for('home') }}">Cancel</a>
+</form></main></body></html>

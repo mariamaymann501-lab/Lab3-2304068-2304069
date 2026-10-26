@@ -1,0 +1,262 @@
+/* ==========================================================
+   Library - Login & Registration pages
+   Split-screen layout: dark "library" panel on the left,
+   the form on the right.
+   ========================================================== */
+
+:root {
+  --navy: #14213d;        /* left panel */
+  --navy-2: #1f3158;
+  --ink: #14213d;         /* headings */
+  --text: #2b3445;
+  --muted: #5b6b80;
+  --page: #eef2f6;        /* right side background */
+  --white: #ffffff;
+  --line: #cdd6e1;        /* input borders */
+  --teal: #0f766e;        /* main accent */
+  --teal-dark: #0b5d57;
+  --red: #b4233c;
+  --green: #1d6b45;
+}
+
+* { box-sizing: border-box; }
+
+body.auth-page {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  color: var(--text);
+  background: var(--page);
+}
+
+/* ---------- left panel ---------- */
+.auth-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 48px 56px 0;
+  color: #e8edf5;
+  background: linear-gradient(160deg, var(--navy-2) 0%, var(--navy) 70%);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.4rem;
+  letter-spacing: .5px;
+}
+
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #e9b949;
+  border-radius: 8px;
+  color: #e9b949;
+  font-weight: 700;
+}
+
+.side-text h2 {
+  margin: 0 0 14px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-size: 2.2rem;
+  line-height: 1.25;
+  color: #ffffff;
+}
+
+.side-text p {
+  margin: 0;
+  max-width: 380px;
+  color: #b9c4d6;
+  line-height: 1.6;
+}
+
+/* the CSS bookshelf */
+.shelf {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 150px;
+  padding: 0 4px;
+  border-bottom: 10px solid #8a6a3b;   /* the wooden shelf */
+}
+
+.spine {
+  width: 28px;
+  border-radius: 3px 3px 0 0;
+  box-shadow: inset -4px 0 0 rgba(0, 0, 0, .18);
+}
+
+.s1 { height: 120px; background: #0f766e; }
+.s2 { height: 95px;  background: #e9b949; }
+.s3 { height: 135px; background: #d1495b; width: 34px; }
+.s4 { height: 105px; background: #edf2f4; }
+.s5 { height: 125px; background: #3d5a80; }
+.s6 { height: 88px;  background: #2a9d8f; width: 22px; }
+.s7 { height: 112px; background: #e07a5f; }
+.s8 { height: 100px; background: #98c1d9; transform: rotate(8deg); transform-origin: bottom left; }
+
+/* ---------- right side ---------- */
+.auth-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+.auth-box {
+  width: 100%;
+  max-width: 380px;
+}
+
+/* Log in / Register switch */
+.tabs {
+  display: flex;
+  padding: 4px;
+  margin-bottom: 32px;
+  background: #dfe6ee;
+  border-radius: 999px;
+}
+
+.tabs a {
+  flex: 1;
+  padding: 9px 0;
+  text-align: center;
+  border-radius: 999px;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: .95rem;
+}
+
+.tabs a.active {
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(20, 33, 61, .15);
+}
+
+h1 {
+  margin: 0 0 6px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-size: 2rem;
+  color: var(--ink);
+}
+
+.subtitle {
+  margin: 0 0 26px;
+  color: var(--muted);
+}
+
+/* form fields */
+.field {
+  margin-bottom: 18px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.field input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 4px rgba(15, 118, 110, .15);
+}
+
+.field.has-error input {
+  border-color: var(--red);
+}
+
+.field-error {
+  display: block;
+  margin-top: 6px;
+  font-size: .85rem;
+  color: var(--red);
+}
+
+/* messages */
+.alert {
+  margin-bottom: 20px;
+  padding: 11px 14px;
+  border-left: 4px solid;
+  border-radius: 6px;
+  font-size: .95rem;
+}
+
+.alert.error { background: #fbe9ec; border-color: var(--red);   color: #7d1427; }
+.alert.ok, .alert.message { background: #e3f3ea; border-color: var(--green); color: #14512f; }
+
+/* button */
+.btn-primary {
+  width: 100%;
+  margin-top: 8px;
+  padding: 13px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  background: var(--teal);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.btn-primary:hover { background: var(--teal-dark); }
+
+.switch {
+  margin-top: 24px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.switch a {
+  color: var(--teal);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.switch a:hover { text-decoration: underline; }
+
+/* ---------- small screens: stack the two sides ---------- */
+@media (max-width: 800px) {
+  body.auth-page {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-side {
+    padding: 28px 24px 0;
+    gap: 20px;
+  }
+
+  .side-text h2 { font-size: 1.6rem; }
+  .side-text p  { display: none; }
+  .shelf        { height: 80px; }
+  .spine        { transform: scaleY(.6); transform-origin: bottom; }
+  .s8           { transform: scaleY(.6) rotate(8deg); }
+
+  .auth-main { padding: 32px 16px; }
+}
