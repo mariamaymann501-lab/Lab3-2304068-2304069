@@ -1,8 +1,3 @@
--- Lab 3 - Part 2: Library - users table for Login / Registration
--- Run this AFTER problem2_DDL.sql and problem2_DML.sql.
--- It does NOT drop or change the AUTHOR and BOOK tables or their data,
--- and running it a second time does nothing (IF NOT EXISTS).
-
 USE library;
 
 CREATE TABLE IF NOT EXISTS users (
