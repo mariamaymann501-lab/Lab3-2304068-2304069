@@ -1,7 +1,3 @@
--- Lab 3 - Part 2: Library - BONUS (images for books and authors)
--- Run this AFTER problem2_DDL.sql and problem2_DML.sql (optional: the website
--- also adds these columns by itself the first time it starts).
--- It does NOT drop or change existing rows. Running it twice is safe.
 
 USE library;
 
